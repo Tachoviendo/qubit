@@ -1,0 +1,19 @@
+ > Training Environment:
+ | > Backend: Torch
+ | > Mixed precision: False
+ | > Precision: float32
+ | > Num. of CPUs: 8
+ | > Num. of Torch Threads: 4
+ | > Torch seed: 54321
+ | > Torch CUDNN: True
+ | > Torch CUDNN deterministic: False
+ | > Torch CUDNN benchmark: False
+ | > Torch TF32 MatMul: False
+ > Start Tensorboard: tensorboard --logdir=/home/tacho/Documents/qubit/tts/qubitVoice_easy_train/run-June-25-2025_09+18PM-0000000
+
+ > Model has 83059372 parameters
+
+[4m[1m > EPOCH: 0/200[0m
+ --> /home/tacho/Documents/qubit/tts/qubitVoice_easy_train/run-June-25-2025_09+18PM-0000000
+
+[1m > TRAINING (2025-06-25 21:18:58) [0m
