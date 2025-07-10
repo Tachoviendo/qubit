@@ -1,4 +1,3 @@
-
 import os
 import sys
 import queue
@@ -22,7 +21,7 @@ class VozListener:
         self.sample_rate = sample_rate
         self.q = queue.Queue()
         self.encoder = VoiceEncoder()
-        self.embeddings = self.cargar_perfiles("voice_profiles")
+        self.embeddings = self.cargar_perfiles("voice_profiles/wavs")
 
     def _callback(self, indata, frames, time, status):
         if status:

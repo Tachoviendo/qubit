@@ -10,13 +10,17 @@ from resemblyzer import VoiceEncoder, preprocess_wav
 from pathlib import Path
 from scipy.spatial.distance import cdist
 import soundfile as sf
+import re
 
 class VozListener:
     def __init__(self, modelo_path=None, sample_rate=16000):
+        # Ruta base de este archivo
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        
+        # Modelo default si no se pasa ninguno
         if modelo_path is None:
-            base_dir = os.path.dirname(os.path.abspath(__file__))
             modelo_path = os.path.join(base_dir, "vosk-model-small-es-0.42")
-
+        
         if not os.path.exists(modelo_path):
             print(f"Error: no se encontró el modelo en '{modelo_path}'")
             sys.exit(1)
@@ -25,7 +29,10 @@ class VozListener:
         self.sample_rate = sample_rate
         self.q = queue.Queue()
         self.encoder = VoiceEncoder()
-        self.embeddings = self.cargar_perfiles(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../voice_profiles"))
+        
+        # Ruta a carpeta wavs con perfiles
+        perfiles_path = os.path.join(base_dir, "../voice_profiles/wavs")
+        self.embeddings = self.cargar_perfiles(perfiles_path)
 
     def _callback(self, indata, frames, time, status):
         if status:
@@ -62,7 +69,9 @@ class VozListener:
         confianza = 1 - distancias[idx]
 
         if confianza > 0.75:
-            return nombres[idx], confianza
+            # Quitar números del nombre para usar sólo texto
+            nombre = re.sub(r'\d+', '', nombres[idx])
+            return nombre, confianza
         else:
             return "desconocido", confianza
 
@@ -111,25 +120,3 @@ class VozListener:
                 pass
 
             return texto.strip(), hablante, round(confianza, 2)
-
-def recognize_worker(audio_queue, text_queue):
-    try:
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        model_path = os.path.join(base_dir, "vosk-model-small-es-0.42")
-        model = vosk.Model(model_path)
-        rec = vosk.KaldiRecognizer(model, 16000)
-    except Exception as e:
-        print(f"[Vosk] Error cargando el modelo: {e}")
-        return
-
-    while True:
-        data = audio_queue.get()
-        if rec.AcceptWaveform(data):
-            try:
-                result = json.loads(rec.Result())
-                user_text = result.get("text", "").strip()
-                if user_text:
-                    print(f"[Vosk] Usuario dijo: {user_text}")
-                    text_queue.put(user_text)
-            except Exception as e:
-                print(f"[Vosk] Error al procesar resultado: {e}")

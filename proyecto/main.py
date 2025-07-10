@@ -27,7 +27,7 @@ class AssistantThread(QThread):
         speaker_name_queue = queue.Queue()
 
         can_listen = threading.Event()
-        can_listen.set()
+        can_listen.set()  # Permite escuchar inicialmente
 
         conversation_history = [
             {
@@ -46,6 +46,9 @@ class AssistantThread(QThread):
                 print(f"[Audio] Estado: {status}")
             if can_listen.is_set():
                 audio_queue.put(bytes(indata))
+            else:
+                # Cuando el asistente habla, no captura audio
+                pass
 
         try:
             stream = sd.RawInputStream(

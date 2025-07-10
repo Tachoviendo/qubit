@@ -6,7 +6,7 @@ import os
 import argparse
 import sys
 
-def grabar_audio(nombre="Nacho", carpeta="voice_profiles", duracion=5, sample_rate=16000):
+def grabar_audio(nombre, carpeta="wavs", duracion=5, sample_rate=16000):
     if not os.path.exists(carpeta):
         os.makedirs(carpeta)
 
@@ -41,7 +41,7 @@ import os
 import argparse
 import sys
 
-def grabar_audio(nombre="Nacho", carpeta="voice_profiles", duracion=5, sample_rate=16000):
+def grabar_audio(nombre="Nacho", carpeta="wavs", duracion=5, sample_rate=16000):
     if not os.path.exists(carpeta):
         os.makedirs(carpeta)
 
