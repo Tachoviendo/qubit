@@ -1,6 +1,3 @@
-Ok, entiendo. Aquí tienes el contenido completo del `README.md` en texto plano, sin ningún formato Markdown visible (sin `#`, `*`, `---`, \`\`\`\`bash\`, etc.). Es simplemente el texto crudo.
-
-```
 # Qubit: Tu Asistente Técnico por Voz Personalizado
 
 ¡Bienvenido a Qubit! Un innovador asistente técnico por voz diseñado para responder tus dudas básicas y, lo más sorprendente, ¡reconocerte por tu propia voz!
@@ -13,93 +10,99 @@ Qubit es un asistente de voz multifuncional que te permite interactuar de forma 
 
 ### ¿Cómo funciona?
 
-1.  **Reconocimiento de Voz (STT):** Qubit escucha tus comandos y preguntas gracias a **Vosk**, que transforma tu voz en texto.
-2.  **Identificación de Hablante:** Para una experiencia personalizada, **Resemblyzer** analiza tu voz y determina si eres un usuario registrado, permitiendo a Qubit reconocerte.
-3.  **Procesamiento de Lenguaje Natural (LLM):** Las preguntas son procesadas por un modelo **Ollama** que interpreta tu intención y genera respuestas coherentes.
-4.  **Síntesis de Voz (TTS):** Finalmente, **Tacotron2** convierte la respuesta generada en voz, permitiendo que Qubit te hable.
-5.  **Mascota Virtual:** Una interfaz visual acompaña la interacción, brindando una experiencia más dinámica y atractiva.
+1. **Reconocimiento de Voz (STT):** Qubit escucha tus comandos y preguntas gracias a **Vosk**, que transforma tu voz en texto.  
+2. **Identificación de Hablante:** Con **Resemblyzer**, Qubit determina si eres un usuario registrado para ofrecerte una experiencia personalizada.  
+3. **Procesamiento de Lenguaje Natural (LLM):** Las preguntas se procesan mediante un modelo **Ollama**, que genera respuestas coherentes.  
+4. **Síntesis de Voz (TTS):** **Tacotron2** convierte el texto generado en audio para que Qubit te responda hablando.  
+5. **Mascota Virtual:** Una interfaz visual amigable acompaña la interacción, haciéndola más dinámica y atractiva.
 
 ---
 
 ## Instalación
 
-Sigue estos pasos para poner Qubit en funcionamiento en tu máquina.
-
 ### Requisitos previos
 
-Asegúrate de tener Python 3.8 o superior instalado.
+- Python 3.8 o superior.
 
 ### Pasos de instalación
 
-1.  **Clona el repositorio:**
+1. **Clona el repositorio:**
 
-    git clone [https://github.com/tu_usuario/Qubit.git](https://github.com/tu_usuario/Qubit.git)
-    cd Qubit
+   ```bash
+   git clone https://github.com/tu_usuario/Qubit.git
+   cd Qubit
+   ```
 
-    *(Reemplaza `tu_usuario` con el nombre de usuario de GitHub donde tengas alojado el repositorio)*
+   > Reemplaza `tu_usuario` con tu nombre de usuario de GitHub.
 
-2.  **Instala las dependencias:**
+2. **Instala las dependencias:**
 
-    Para una instalación rápida y sencilla, puedes usar el script de instalación:
+   Opción 1 – instalación automática:
 
-    chmod +x install.sh
-    ./install.sh
+   ```bash
+   chmod +x install.sh
+   ./install.sh
+   ```
 
-    Alternativamente, puedes instalar las dependencias manualmente:
+   Opción 2 – instalación manual:
 
-    pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-    **Nota:** La instalación de los modelos de Vosk, Ollama y Tacotron2 puede requerir descargas adicionales que el script `install.sh` debería gestionar. Asegúrate de tener conexión a internet durante la instalación.
+   > Nota: El script `install.sh` gestiona la descarga de los modelos requeridos. Asegúrate de estar conectado a internet.
 
 ---
 
 ## Grabación de Perfiles de Voz
 
-Para que Qubit te reconozca, necesitas grabar un perfil de voz. Este proceso es sencillo y solo lo tienes que hacer una vez por usuario.
+Para que Qubit te reconozca, necesitas grabar un perfil de voz.
 
-### ¿Cómo grabar un perfil de voz?
+### ¿Cómo grabar un perfil?
 
-Utiliza el script `record_profile.py` para grabar tu voz. Asegúrate de estar en un ambiente tranquilo para obtener la mejor calidad de perfil.
+Ejecuta el siguiente script en un entorno silencioso:
 
+```bash
 python record_profile.py
+```
 
-Al ejecutar el script, se te pedirá que hables durante unos segundos. Sigue las instrucciones en pantalla.
+Sigue las instrucciones en pantalla para grabar tu voz.
 
 ### Nomenclatura de los archivos
 
-Es crucial nombrar los archivos de perfil de voz de manera correcta para que Qubit pueda identificarlos. El formato debe ser [nombre_usuario][numero], sin espacios ni caracteres especiales.
+Usa el siguiente formato para nombrar los archivos:
 
-**Ejemplos válidos:**
-* juan1.wav
-* maria2.wav
-* pedro3.wav
+- `juan1.wav`
+- `maria2.wav`
+- `pedro3.wav`
 
-### Dónde se guardan los archivos
+> Sin espacios ni caracteres especiales.
 
-Los perfiles de voz grabados se guardarán automáticamente en la carpeta `profiles/`.
+### Ubicación
+
+Los perfiles se guardan en la carpeta `profiles/`.
 
 ---
 
 ## Uso del Asistente
 
-Una vez que hayas instalado Qubit y grabado tu perfil de voz, ¡estás listo para interactuar!
+Una vez instalado y configurado:
 
 ### Iniciar Qubit
 
-Ejecuta el archivo principal para iniciar el asistente:
-
+```bash
 python main.py
+```
 
 ### Interacción
 
-Una vez iniciado, Qubit estará a la escucha. Simplemente di "Qubit" para activarlo, y luego formula tu pregunta. Qubit te responderá vocalmente.
+Di "Qubit" para activarlo y luego formula tu pregunta. Qubit te responderá vocalmente.
 
 ---
 
 ## Estructura del Proyecto
 
-Aquí te mostramos una visión general de la estructura principal de Qubit:
-
+```
 .
 ├── main.py
 ├── requirements.txt
@@ -121,28 +124,7 @@ Aquí te mostramos una visión general de la estructura principal de Qubit:
 │   └── another_profile2.wav
 └── assets/
     └── virtual_pet_sprites/
-
-* **`main.py`**: Punto de entrada principal del asistente.
-* **`requirements.txt`**: Lista de todas las dependencias de Python.
-* **`install.sh`**: Script para la instalación rápida.
-* **`record_profile.py`**: Script para grabar nuevos perfiles de voz.
-* **`config.py`**: Archivo de configuración para rutas de modelos, sensibilidades, etc.
-* **`utils/`**: Contiene módulos con funcionalidades específicas (grabación, STT, TTS, reconocimiento de hablante, LLM).
-* **`models/`**: Carpeta para almacenar los modelos de Vosk, Tacotron2 y Ollama.
-* **`profiles/`**: Almacena los perfiles de voz de los usuarios.
-* **`assets/`**: Contiene recursos gráficos para la mascota virtual u otros elementos visuales.
-
----
-
-## Consejos para Mejor Uso
-
-Para una experiencia óptima con Qubit, ten en cuenta las siguientes recomendaciones:
-
-* **Usa auriculares:** Esto ayuda a evitar la autoescucha o feedback de audio, lo que puede interferir con el reconocimiento de voz.
-* **Ambiente silencioso:** Graba tus perfiles de voz y usa Qubit en un entorno lo más silencioso posible para mejorar la precisión del STT y el reconocimiento de hablante.
-* **Verifica la ruta del modelo Vosk:** Asegúrate de que la ruta al modelo de Vosk en `config.py` sea correcta y que el modelo esté completamente descargado.
-* **Conexión a internet:** Para la descarga inicial de modelos (especialmente Ollama y Vosk, si no se incluyen preinstalados), necesitarás una conexión a internet estable.
-* **Habla claro:** Pronuncia tus palabras de forma clara y a un ritmo natural.
+```
 
 ---
 
@@ -164,27 +146,33 @@ Para una experiencia óptima con Qubit, ten en cuenta las siguientes recomendaci
 
 ---
 
+## Consejos para Mejor Uso
+
+- **Usa auriculares:** Evita retroalimentación de audio.  
+- **Ambiente silencioso:** Mejora la precisión del reconocimiento de voz.  
+- **Revisa rutas:** Especialmente para el modelo de Vosk en `config.py`.  
+- **Internet requerido:** Para la descarga inicial de modelos.  
+- **Habla claro:** Mejora el rendimiento del STT y el reconocimiento de hablante.
+
+---
+
 ## Contribuciones
 
-¡Tu ayuda es bienvenida! Si encuentras un error, tienes una idea para una nueva característica o simplemente quieres mejorar el código, no dudes en:
+¡Tu ayuda es bienvenida!  
+Puedes:
 
-* Abrir un `issue` para reportar un problema o sugerir una mejora.
-* Enviar un `pull request` con tus contribuciones.
-
-Agradecemos cualquier tipo de colaboración para hacer de Qubit un proyecto aún mejor.
+- Abrir un `issue` para reportar errores o sugerencias.
+- Enviar un `pull request` con mejoras o nuevas funciones.
 
 ---
 
 ## Licencia
 
-Este proyecto está bajo una licencia que permite su uso personal y educativo. Para otros usos, por favor, contacta a los desarrolladores.
+Este proyecto está bajo una licencia que permite su uso personal y educativo. Para otros usos, contacta a los desarrolladores.
 
 ---
 
 ## Contacto
 
-Para cualquier consulta, soporte o sugerencia, no dudes en contactarnos:
-
-* **Email:** soporte.qubit@example.com
-* **GitHub Issues:** [Enlace a Issues de tu repositorio](https://github.com/tu_usuario/Qubit/issues)
-```
+**Email:** soporte.qubit@example.com  
+**GitHub Issues:** [https://github.com/tu_usuario/Qubit/issues](https://github.com/tu_usuario/Qubit/issues)
