@@ -25,7 +25,7 @@ Qubit es un asistente de voz multifuncional que te permite interactuar de forma 
 - Python 3.8 o superior  
 - Conexión a internet para descargar modelos  
 
-### Instalación
+### Instalación 
 
 1. Clona el repositorio:
 
@@ -33,8 +33,8 @@ Qubit es un asistente de voz multifuncional que te permite interactuar de forma 
 git clone https://github.com/tu_usuario/Qubit.git
 cd Qubit
 ```
-
-2. Crea un entorno virtual (opcional pero recomendado):
+Instalación Manual:
+1. Crea un entorno virtual (opcional pero recomendado): 
 
 ```bash
 python -m venv venv
@@ -42,7 +42,7 @@ venv\Scripts\activate  # Para Windows
 source venv/bin/activate  # Para Linux/macOS
 ```
 
-3. Instala las dependencias:
+2. Instala las dependencias:
 
 ```bash
 pip install -r requirements.txt
@@ -54,7 +54,8 @@ Asegúrate de tener pip actualizado:
 python -m pip install --upgrade pip
 ```
 
-4. Ejecuta el script de instalación de modelos y dependencias adicionales:
+Intralación automática
+1. Ejecuta el script de instalación de modelos y dependencias adicionales:
 
 - **Linux:**
   
@@ -69,6 +70,7 @@ python -m pip install --upgrade pip
 ```
 
 ---
+Listo!
 
 ## Grabación de Perfiles de Voz
 
