@@ -11,10 +11,10 @@ Qubit es un asistente de voz multifuncional que te permite interactuar de forma 
 ### ¿Cómo funciona?
 
 1. **Reconocimiento de Voz (STT):** Qubit escucha tus comandos y preguntas gracias a **Vosk**, que transforma tu voz en texto.  
-2. **Identificación de Hablante:** Con **Resemblyzer**, Qubit determina si eres un usuario registrado para ofrecerte una experiencia personalizada.  
-3. **Procesamiento de Lenguaje Natural (LLM):** Las preguntas se procesan mediante un modelo **Ollama**, que genera respuestas coherentes.  
-4. **Síntesis de Voz (TTS):** **Tacotron2** convierte el texto generado en audio para que Qubit te responda hablando.  
-5. **Mascota Virtual:** Una interfaz visual amigable acompaña la interacción, haciéndola más dinámica y atractiva.
+2. **Identificación de Hablante:** Para una experiencia personalizada, se analiza tu voz para determinar si eres un usuario registrado.  
+3. **Procesamiento de Lenguaje Natural (LLM):** Las preguntas son procesadas por un modelo **Ollama** que interpreta tu intención y genera respuestas coherentes.  
+4. **Síntesis de Voz (TTS):** Se convierte la respuesta generada en voz.  
+5. **Mascota Virtual:** Una interfaz visual acompaña la interacción.  
 
 ---
 
@@ -22,35 +22,51 @@ Qubit es un asistente de voz multifuncional que te permite interactuar de forma 
 
 ### Requisitos previos
 
-- Python 3.8 o superior.
+- Python 3.8 o superior  
+- Conexión a internet para descargar modelos  
 
-### Pasos de instalación
+### Instalación
 
-1. **Clona el repositorio:**
+1. Clona el repositorio:
 
-   ```bash
-   git clone https://github.com/tu_usuario/Qubit.git
-   cd Qubit
-   ```
+```bash
+git clone https://github.com/tu_usuario/Qubit.git
+cd Qubit
+```
 
-   > Reemplaza `tu_usuario` con tu nombre de usuario de GitHub.
+2. Crea un entorno virtual (opcional pero recomendado):
 
-2. **Instala las dependencias:**
+```bash
+python -m venv venv
+venv\Scripts\activate  # Para Windows
+source venv/bin/activate  # Para Linux/macOS
+```
 
-   Opción 1 – instalación automática:
+3. Instala las dependencias:
 
-   ```bash
-   chmod +x install.sh
-   ./install.sh
-   ```
+```bash
+pip install -r requirements.txt
+```
 
-   Opción 2 – instalación manual:
+Asegúrate de tener pip actualizado:
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+python -m pip install --upgrade pip
+```
 
-   > Nota: El script `install.sh` gestiona la descarga de los modelos requeridos. Asegúrate de estar conectado a internet.
+4. Ejecuta el script de instalación de modelos y dependencias adicionales:
+
+- **Linux:**
+  
+```bash
+./install(linux).sh
+```
+
+- **Windows (PowerShell como administrador):**
+
+```powershell
+.\install(windows).ps1
+```
 
 ---
 
@@ -60,33 +76,22 @@ Para que Qubit te reconozca, necesitas grabar un perfil de voz.
 
 ### ¿Cómo grabar un perfil?
 
-Ejecuta el siguiente script en un entorno silencioso:
-
 ```bash
-python record_profile.py
+python voice_profiles/grabar_perfil.py
 ```
 
-Sigue las instrucciones en pantalla para grabar tu voz.
+Sigue las instrucciones en pantalla.
 
 ### Nomenclatura de los archivos
 
-Usa el siguiente formato para nombrar los archivos:
+Formato: `[nombre_usuario][numero].wav`  
+Ejemplos válidos: `juan1.wav`, `maria2.wav`  
 
-- `juan1.wav`
-- `maria2.wav`
-- `pedro3.wav`
-
-> Sin espacios ni caracteres especiales.
-
-### Ubicación
-
-Los perfiles se guardan en la carpeta `profiles/`.
+Los perfiles se guardan en la carpeta `voice_profiles/wavs/`.
 
 ---
 
 ## Uso del Asistente
-
-Una vez instalado y configurado:
 
 ### Iniciar Qubit
 
@@ -96,7 +101,7 @@ python main.py
 
 ### Interacción
 
-Di "Qubit" para activarlo y luego formula tu pregunta. Qubit te responderá vocalmente.
+Di "Qubit" para activarlo y luego formula tu pregunta.
 
 ---
 
@@ -105,74 +110,67 @@ Di "Qubit" para activarlo y luego formula tu pregunta. Qubit te responderá voca
 ```
 .
 ├── main.py
+├── ollama.py
+├── tts.py
+├── voz_listener.py
+├── README.md
+├── install(linux).sh
+├── install(windows).ps1
 ├── requirements.txt
-├── install.sh
-├── record_profile.py
-├── config.py
-├── utils/
-│   ├── audio_recorder.py
-│   ├── stt_vosk.py
-│   ├── tts_tacotron2.py
-│   ├── speaker_recognizer.py
-│   └── llm_ollama.py
-├── models/
-│   ├── vosk_model/
-│   ├── tacotron2_model/
-│   └── ollama_model/
-├── profiles/
-│   ├── your_profile1.wav
-│   └── another_profile2.wav
-└── assets/
-    └── virtual_pet_sprites/
+├── proyecto/
+│   ├── __pycache__/
+│   └── capybara/
+│       ├── __pycache__/
+│       ├── capybara.py
+│       ├── happy.png
+│       ├── sad.png
+│       ├── sleep.png
+│       └── surprise.png
+├── stt/
+│   ├── __pycache__/
+│   ├── vosk-model-small-es-0.42/
+│   └── stt.py
+└── voice_profiles/
+    ├── wavs/
+    └── grabar_perfil.py
 ```
+
+---
+
+## Consejos para Mejor Uso
+
+- Usa auriculares para evitar retroalimentación.  
+- Utiliza Qubit en un ambiente silencioso.  
+- Habla claro y a ritmo natural.  
 
 ---
 
 ## Archivos Principales y Sus Funciones
 
 | Archivo/Carpeta | Función Principal |
-| :---------------------- | :---------------------------------------------------------------- |
-| `main.py` | Orquestador principal del asistente. |
-| `record_profile.py` | Permite grabar y guardar perfiles de voz para el reconocimiento. |
-| `config.py` | Almacena configuraciones globales del proyecto. |
-| `utils/audio_recorder.py` | Gestiona la grabación de audio desde el micrófono. |
-| `utils/stt_vosk.py` | Módulo para la transcripción de voz a texto usando Vosk. |
-| `utils/tts_tacotron2.py`| Módulo para la síntesis de texto a voz con Tacotron2. |
-| `utils/speaker_recognizer.py`| Gestiona la identificación de hablantes con Resemblyzer. |
-| `utils/llm_ollama.py` | Interactúa con el modelo Ollama para procesar preguntas. |
-| `models/` | Contiene los modelos de Vosk, Tacotron2 y Ollama. |
-| `profiles/` | Almacena los archivos de audio de los perfiles de voz de los usuarios. |
-| `assets/` | Contiene recursos para la mascota virtual y otros elementos visuales. |
-
----
-
-## Consejos para Mejor Uso
-
-- **Usa auriculares:** Evita retroalimentación de audio.  
-- **Ambiente silencioso:** Mejora la precisión del reconocimiento de voz.  
-- **Revisa rutas:** Especialmente para el modelo de Vosk en `config.py`.  
-- **Internet requerido:** Para la descarga inicial de modelos.  
-- **Habla claro:** Mejora el rendimiento del STT y el reconocimiento de hablante.
+|-----------------------------|-------------------------------|
+| `main.py` | Orquestador principal del asistente |
+| `ollama.py` | Interfaz para el procesamiento de lenguaje con Ollama |
+| `tts.py` | Módulo para la síntesis de voz (Text-to-Speech) |
+| `voz_listener.py` | Módulo principal para escuchar el activador y comandos |
+| `stt/stt.py` | Transcripción de voz a texto usando Vosk |
+| `proyecto/capybara/capybara.py` | Lógica de la mascota virtual |
+| `voice_profiles/grabar_perfil.py` | Grabación de perfiles de voz de usuario |
+| `voice_profiles/wavs/` | Almacena los perfiles de voz grabados |
+| `stt/vosk-model-small-es-0.42/` | Carpeta que contiene el modelo Vosk |
+| `proyecto/capybara/` | Recursos visuales de la mascota virtual |
 
 ---
 
 ## Contribuciones
 
-¡Tu ayuda es bienvenida!  
-Puedes:
+¡Tu ayuda es bienvenida!
 
-- Abrir un `issue` para reportar errores o sugerencias.
-- Enviar un `pull request` con mejoras o nuevas funciones.
+- Abre un issue para reportar errores o sugerencias.  
+- Envía un pull request con tus mejoras.
 
 ---
 
 ## Licencia
 
-Este proyecto está bajo una licencia que permite su uso personal y educativo. Para otros usos, contacta a los desarrolladores.
-
----
-
-## Contacto
-
-**Email:** soporte.qubit@example.com  
-**GitHub Issues:** [https://github.com/tu_usuario/Qubit/issues](https://github.com/tu_usuario/Qubit/issues)
+Uso personal y educativo. Para otros usos, contactar a los desarrolladores.
